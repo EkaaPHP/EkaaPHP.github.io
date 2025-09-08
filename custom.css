@@ -104,6 +104,43 @@ section h2::after {
     background: rgba(255, 255, 255, 1);
     transform: translateY(-2px);
 }
+.textarea-wrapper {
+    position: relative;
+}
+
+.textarea-wrapper textarea {
+    width: 100%;
+    padding: 15px 20px 15px 50px;
+    border: 2px solid #e1e5e9;
+    border-radius: 12px;
+    font-size: 1em;
+    font-family: inherit;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.textarea-wrapper textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.textarea-icon {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.textarea-wrapper:focus-within .textarea-icon {
+    color: #667eea;
+}
+
 
 .radio-group,
 .checkbox-group {
@@ -251,3 +288,4 @@ section h2::after {
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #5a6fd8, #6a4190);
 }
+
