@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Registrasi</title>
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper">
+            <h1 class="form-title">Registrasi</h1>
+            
+            <form class="registration-form">
+                <section class="account-section">
+                    <h2>Akun</h2>
+                    
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Masukkan Username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password"  placeholder="Minimal 8 karakter" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">Konfirmasi Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                    </div>
+                </section>
+
+                <section class="data-section">
+                    <h2>Data</h2>
+                    
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" id="nama" name="nama" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="pria" name="jenis-kelamin" value="pria">
+                                <label for="pria">Pria</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="perempuan" name="jenis-kelamin" value="perempuan">
+                                <label for="perempuan">Perempuan</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Informasi Yang Disukai</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="olahraga" name="informasi" value="olahraga">
+                                <label for="olahraga">Olahraga</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="travelling" name="informasi" value="travelling">
+                                <label for="travelling">Travelling</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="kesehatan" name="informasi" value="kesehatan">
+                                <label for="kesehatan">Kesehatan</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Select Option Section -->
+                <div class="input-section">
+                    <h3><i class="fas fa-list-ul"></i> Pendidikan Terakhir </h3>
+                    <div class="input-group">
+                        <div class="select-wrapper">
+                            <i class="fas fa-graduation-cap select-icon"></i>
+                            <select id="education" name="education" required>
+                                <option value="">-- Pilih Pendidikan --</option>
+                                <option value="sma">SMA/SMK</option>
+                                <option value="diploma">Diploma</option>
+                                <option value="sarjana">Sarjana (S1)</option>
+                                <option value="magister">Magister (S2)</option>
+                                <option value="doktor">Doktor (S3)</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">Daftar</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
