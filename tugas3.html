@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana</title>
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+    <table class="calculator-container">
+        <tr>
+            <td colspan="4">
+                <h1 class="title"> Tugas Kalkulator Sederhana</h1>
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="4">
+                <label class="input-label">Input Bilangan 1:</label>
+                <input type="number" id="bilangan1" class="input-field" placeholder="Masukkan bilangan pertama" step="any">
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="4">
+                <label class="input-label">Input Bilangan 2:</label>
+                <input type="number" id="bilangan2" class="input-field" placeholder="Masukkan bilangan kedua" step="any">
+            </td>
+        </tr>
+        
+        <tr class="operations-row">
+            <td>
+                <button class="operation-btn" onclick="selectOperation('+')" id="btn-tambah">+</button>
+            </td>
+            <td>
+                <button class="operation-btn" onclick="selectOperation('-')" id="btn-kurang">-</button>
+            </td>
+            <td>
+                <button class="operation-btn" onclick="selectOperation('*')" id="btn-kali">×</button>
+            </td>
+            <td>
+                <button class="operation-btn" onclick="selectOperation('/')" id="btn-bagi">÷</button>
+            </td>
+        </tr>
+        
+        <tr class="button-row">
+            <td colspan="4">
+                <button class="calculate-btn" onclick="hitungHasil()">HITUNG HASIL</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="4">
+                <table class="result-display" id="hasil">
+                    <tr>
+                        <td>Hasil</td>
+                     </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="4">
+                <button class="clear-btn" onclick="clearAll()">BERSIHKAN</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="4">
+                <table class="error" id="error-message">
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        // Variabel global untuk menyimpan operasi yang dipilih
+let selectedOperation = '';
+
+// Fungsi untuk memilih operasi matematika
+function selectOperation(operation) {
+    // Reset semua button
+    document.querySelectorAll('.operation-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    
+    // Tandai button yang dipilih
+    selectedOperation = operation;
+    let buttonId = '';
+    switch(operation) {
+        case '+': buttonId = 'btn-tambah'; break;
+        case '-': buttonId = 'btn-kurang'; break;
+        case '*': buttonId = 'btn-kali'; break;
+        case '/': buttonId = 'btn-bagi'; break;
+    }
+    document.getElementById(buttonId).classList.add('selected');
+    
+    // Clear error message
+    document.getElementById('error-message').querySelector('td').textContent = '';
+}
+
+// Fungsi untuk menghitung hasil
+function hitungHasil() {
+    const bilangan1 = parseFloat(document.getElementById('bilangan1').value);
+    const bilangan2 = parseFloat(document.getElementById('bilangan2').value);
+    const hasilElement = document.getElementById('hasil').querySelector('td');
+    const errorElement = document.getElementById('error-message').querySelector('td');
+    
+    // Clear previous error
+    errorElement.textContent = '';
+    
+    // Validasi input
+    if (isNaN(bilangan1) || isNaN(bilangan2)) {
+        errorElement.textContent = 'Mohon masukkan kedua bilangan dengan benar!';
+        hasilElement.textContent = 'Error';
+        return;
+    }
+    
+    if (selectedOperation === '') {
+        errorElement.textContent = 'Mohon pilih operasi matematika terlebih dahulu!';
+        hasilElement.textContent = 'Error';
+        return;
+    }
+    
+    let hasil;
+    let operationSymbol;
+    
+    // Proses kalkulasi berdasarkan operasi yang dipilih
+    switch(selectedOperation) {
+        case '+':
+            hasil = bilangan1 + bilangan2;
+            operationSymbol = '+';
+            break;
+        case '-':
+            hasil = bilangan1 - bilangan2;
+            operationSymbol = '-';
+            break;
+        case '*':
+            hasil = bilangan1 * bilangan2;
+            operationSymbol = '×';
+            break;
+        case '/':
+            if (bilangan2 === 0) {
+                errorElement.textContent = 'Tidak bisa membagi dengan nol!';
+                hasilElement.textContent = 'Error';
+                return;
+            }
+            hasil = bilangan1 / bilangan2;
+            operationSymbol = '÷';
+            break;
+        default:
+            errorElement.textContent = 'Operasi tidak valid!';
+            hasilElement.textContent = 'Error';
+            return;
+    }
+    
+    // Format hasil untuk menghindari desimal panjang
+    const formattedHasil = Number.isInteger(hasil) ? hasil.toString() : hasil.toFixed(4).replace(/\.?0+$/, '');
+    
+    // Tampilkan hasil dengan format yang menarik
+    hasilElement.innerHTML = `
+        <table style="width: 100%; text-align: center;">
+            <tr>
+                <td style="font-size: 14px; color: #666; padding-bottom: 5px;">
+                    ${bilangan1} ${operationSymbol} ${bilangan2} =
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 28px; color: #4CAF50; font-weight: bold;">
+                    ${formattedHasil}
+                </td>
+            </tr>
+        </table>
+    `;
+}
+
+// Fungsi untuk membersihkan semua input dan hasil
+function clearAll() {
+    document.getElementById('bilangan1').value = '';
+    document.getElementById('bilangan2').value = '';
+    document.getElementById('hasil').querySelector('td').textContent = 'Hasil akan muncul di sini';
+    document.getElementById('error-message').querySelector('td').textContent = '';
+    
+    // Reset selected operation
+    selectedOperation = '';
+    document.querySelectorAll('.operation-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+}
+
+// Event listeners untuk keyboard support
+document.addEventListener('DOMContentLoaded', function() {
+    // Enter key untuk pindah dari input pertama ke kedua
+    document.getElementById('bilangan1').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.getElementById('bilangan2').focus();
+        }
+    });
+
+    // Enter key untuk menghitung hasil dari input kedua
+    document.getElementById('bilangan2').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            hitungHasil();
+        }
+    });
+    
+    // Keyboard shortcuts untuk operasi
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case '+':
+                selectOperation('+');
+                break;
+            case '-':
+                selectOperation('-');
+                break;
+            case '*':
+                selectOperation('*');
+                break;
+            case '/':
+                e.preventDefault(); // Prevent default browser search
+                selectOperation('/');
+                break;
+            case '=':
+            case 'Enter':
+                if (e.target.tagName !== 'INPUT') {
+                    hitungHasil();
+                }
+                break;
+            case 'Escape':
+                clearAll();
+                break;
+        }
+    });
+});
+    </script>
+</body>
+</html>
