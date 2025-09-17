@@ -161,7 +161,7 @@ function hitungHasil() {
     // Format hasil untuk menghindari desimal panjang
     const formattedHasil = Number.isInteger(hasil) ? hasil.toString() : hasil.toFixed(4).replace(/\.?0+$/, '');
     
-    // Tampilkan hasil dengan format yang menarik
+    // Tampilkan hasil 
     hasilElement.innerHTML = `
         <table style="width: 100%; text-align: center;">
             <tr>
@@ -240,3 +240,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </body>
 
 </html>
+
